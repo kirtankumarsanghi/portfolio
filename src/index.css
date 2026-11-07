@@ -1,0 +1,361 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Unbounded Variable", "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --color-lime: #c6ff00;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --bg: #0b0c0d;
+  --fg: #ffffff;
+  --fg-muted: rgba(255, 255, 255, 0.55);
+  --fg-grey: #8a8a8a;
+  --fg-faint: rgba(255, 255, 255, 0.24);
+  --line: rgba(255, 255, 255, 0.12);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --accent: #c6ff00;
+  --blue-a: #0b17a8;
+  --blue-b: #050a55;
+  --hud-fg: #ffffff;
+  --hud-line: rgba(255, 255, 255, 0.16);
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --grid-mark: rgba(255, 255, 255, 0.25);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #eceae4;
+  --fg: #0b0c0d;
+  --fg-muted: rgba(11, 12, 13, 0.6);
+  --fg-grey: #7b7b76;
+  --fg-faint: rgba(11, 12, 13, 0.3);
+  --line: rgba(11, 12, 13, 0.14);
+  --card-border: rgba(11, 12, 13, 0.12);
+  --accent: #3f6600;
+  --hud-fg: #0b0c0d;
+  --hud-line: rgba(11, 12, 13, 0.16);
+  --grid-line: rgba(11, 12, 13, 0.07);
+  --grid-mark: rgba(11, 12, 13, 0.3);
+  color-scheme: light;
+}
+
+/* HUD stays legible while a blue / black scene owns the viewport */
+:root[data-tone="invert"] {
+  --hud-fg: #ffffff;
+  --hud-line: rgba(255, 255, 255, 0.16);
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --grid-mark: rgba(255, 255, 255, 0.25);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background: var(--bg);
+  scroll-behavior: auto;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color 0.7s var(--ease-out-expo), color 0.7s var(--ease-out-expo);
+}
+
+::selection {
+  background: #c6ff00;
+  color: #05060a;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+li {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+/* ---------- type ---------- */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.display {
+  /* self-hosted Unbounded variable (800) — heavy and wide, never a Helvetica/Inter bold.
+     Rule 0: display text is never selectable, so clicks on headlines or the name canvas never highlight it. */
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wght" 800;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+canvas {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Unbounded is a wide face: these clamps keep every headline on one line at 390/1440/1920 */
+.d-hero {
+  font-size: clamp(27px, 6.1vw, 158px);
+}
+.d-warp {
+  font-size: clamp(24px, 6.2vw, 152px);
+}
+.d-contact {
+  font-size: clamp(24px, 6.5vw, 168px);
+}
+
+/* Spec 4.7 — links: 1px underline grows left → right in 0.25s; no text movement */
+.link-line {
+  position: relative;
+  display: inline-block;
+}
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease-out-expo);
+  pointer-events: none;
+}
+.link-line:hover::after,
+.link-line:focus-visible::after {
+  transform: scaleX(1);
+}
+.d-h2 {
+  font-size: clamp(24px, 3.4vw, 56px);
+}
+.d-row {
+  font-size: clamp(22px, 1.95vw, 30px);
+  line-height: 1;
+}
+.d-case {
+  font-size: clamp(34px, 4.4vw, 76px);
+}
+
+.mask-line {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.05em;
+  margin-block: -0.05em;
+}
+.mask-line > span {
+  display: block;
+  will-change: transform;
+}
+
+/* ---------- HUD: grid overlay ---------- */
+.hud-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
+  box-shadow: inset -1px 0 0 var(--grid-line);
+  transition: background-image 0.6s var(--ease-out-expo);
+}
+.hud-plus {
+  position: fixed;
+  inset: 0;
+  z-index: 61;
+  pointer-events: none;
+}
+.hud-plus .hud-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--grid-line);
+}
+.hud-plus .plus {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  background:
+    linear-gradient(var(--grid-mark), var(--grid-mark)) center / 1px 7px no-repeat,
+    linear-gradient(var(--grid-mark), var(--grid-mark)) center / 7px 1px no-repeat;
+}
+
+.nav-box {
+  position: relative;
+}
+.nav-box::before {
+  content: "";
+  position: absolute;
+  inset: -6px -9px;
+  border: 1px solid currentColor;
+  opacity: 0;
+  transform: scale(0.88);
+  transition: opacity 0.2s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
+  pointer-events: none;
+}
+.nav-box:hover::before,
+.nav-box:focus-visible::before {
+  opacity: 0.9;
+  transform: scale(1);
+}
+
+/* globe: meridians sweep to fake a slow longitudinal spin */
+.meridian {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: meridian 7s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+@keyframes meridian {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.04);
+  }
+}
+
+/* ---------- About: underlined keywords ---------- */
+.kw {
+  position: relative;
+  color: var(--fg);
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  cursor: default;
+  outline: none;
+}
+.kw::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 2px;
+  background: #c6ff00;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.kw:hover::after,
+.kw:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Warp rings ---------- */
+.warp-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(54vw, 820px);
+  aspect-ratio: 3.4 / 1;
+  border: 1px solid #c6ff00;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  opacity: 0;
+  animation: ring-pulse 6.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes ring-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.08);
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* ---------- misc ---------- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+body.cursor-none,
+body.cursor-none a,
+body.cursor-none button,
+body.cursor-none [role="button"] {
+  cursor: none;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin-slow 38s linear infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.7);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-slow,
+  .pulse-dot,
+  .meridian {
+    animation: none !important;
+  }
+  .warp-ring {
+    animation: none !important;
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "name": "Nirixon",
+    "description": "Pediatric Neurodevelopmental NLP Screening & Adaptive Assessment Platform",
+    "language": "Python",
+    "topics": ["nlp", "fastapi", "scikit-learn", "healthcare"],
+    "html_url": "https://github.com/kirtankumarsanghi/Nirixon",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-01-01T00:00:00Z",
+    "fork": false
+  },
+  {
+    "name": "ResQSync",
+    "description": "Emergency Resource Allocation & Conflict Resolution Platform",
+    "language": "Python",
+    "topics": ["fastapi", "react", "emergency-response", "rbac"],
+    "html_url": "https://github.com/kirtankumarsanghi/ResQSync",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-01-01T00:00:00Z",
+    "fork": false
+  },
+  {
+    "name": "Cognivia",
+    "description": "Real-Time Classroom Intelligence & AI Tutoring Platform",
+    "language": "TypeScript",
+    "topics": ["react", "nodejs", "supabase", "gemini-api"],
+    "html_url": "https://github.com/kirtankumarsanghi/Cognivia",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-01-01T00:00:00Z",
+    "fork": false
+  },
+  {
+    "name": "Taalmel-Sync",
+    "description": "Event-Sourced Medication Reconciliation Engine",
+    "language": "TypeScript",
+    "topics": ["event-sourcing", "prisma", "redis", "healthcare"],
+    "html_url": "https://github.com/kirtankumarsanghi/Taalmel-Sync",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-01-01T00:00:00Z",
+    "fork": false
+  },
+  {
+    "name": "Echona",
+    "description": "where emotions echo through music",
+    "language": "JavaScript",
+    "topics": [],
+    "html_url": "https://github.com/kirtankumarsanghi/Echona",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-01-01T00:00:00Z",
+    "fork": false
+  },
+  {
+    "name": "Saarthi_Smart_Resource_Allocation_Platform",
+    "description": "Fork of OmWattamwar2911's Saarthi — smart resource allocation platform.",
+    "language": "JavaScript",
+    "topics": [],
+    "html_url": "https://github.com/kirtankumarsanghi/Saarthi_Smart_Resource_Allocation_Platform",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-01-01T00:00:00Z",
+    "fork": true
+  },
+  {
+    "name": "Unbiased-ai",
+    "description": "",
+    "language": "TypeScript",
+    "topics": [],
+    "html_url": "https://github.com/kirtankumarsanghi/Unbiased-ai",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-01-01T00:00:00Z",
+    "fork": false
+  },
+  {
+    "name": "THRYVE",
+    "description": "",
+    "language": "JavaScript",
+    "topics": [],
+    "html_url": "https://github.com/kirtankumarsanghi/THRYVE",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-01-01T00:00:00Z",
+    "fork": false
+  },
+  {
+    "name": "UNISPHERE",
+    "description": "",
+    "language": "TypeScript",
+    "topics": [],
+    "html_url": "https://github.com/kirtankumarsanghi/UNISPHERE",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-01-01T00:00:00Z",
+    "fork": false
+  }
+]
