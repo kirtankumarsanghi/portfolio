@@ -54,7 +54,19 @@ function useCountUp(value: number) {
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const tagFor = (p: Project) =>
-  p.domain === "ai-ml" ? "ML / NLP" : p.domain === "backend" ? "BACKEND" : p.domain === "civic" ? "CIVIC-TECH" : p.domain === "edtech" ? "EDTECH" : "FULL-STACK";
+  p.domain === "ai-ml"
+    ? "ML / NLP"
+    : p.domain === "backend"
+      ? "BACKEND"
+      : p.domain === "civic"
+        ? "CIVIC-TECH"
+        : p.domain === "edtech"
+          ? "EDTECH"
+          : p.domain === "creative"
+            ? "CREATIVE"
+            : p.domain === "playground"
+              ? "PLAYGROUND"
+              : "FULL-STACK";
 
 /* ---------------------------------------------------------------- card */
 
@@ -109,7 +121,7 @@ function Card({ project, slot, pair, register, onOpen }: { project: Project; slo
         <span className="relative block">
           <CurlCard media={() => <ProjectMedia project={project} />} />
           <span className="mono absolute top-0 right-3 z-10 -translate-y-1/2 px-[7px] py-[3px] text-[9px]" style={{ background: "#c6ff00", color: "#05060a" }}>
-            {project.mock ? tagFor(project) : statusLabel(project.status)}
+            {project.mock && project.status === "shipped" ? tagFor(project) : statusLabel(project.status)}
           </span>
         </span>
         <span className="mono mt-3 flex items-center justify-between gap-3">

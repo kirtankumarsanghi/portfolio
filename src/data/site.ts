@@ -39,7 +39,7 @@ export const aboutSecondary: Seg[] = [
   { t: ", " },
   { t: "Cognivia", kind: "project", id: "cognivia" },
   { t: " and " },
-  { t: "Taalmel Sync", kind: "project", id: "taalmel" },
+  { t: "Taalmel Sync", kind: "project", id: "taalmel-sync" },
   { t: ". Day to day I work in " },
   { t: "Python", kind: "kw" },
   { t: ", " },

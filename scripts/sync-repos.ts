@@ -17,7 +17,7 @@ import path from "node:path";
 const USER = "kirtankumarsanghi";
 const API = `https://api.github.com/users/${USER}/repos?per_page=100&sort=pushed`;
 const OUT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "src", "data", "repos.snapshot.json");
-const EXCLUDED = new Set(["kirtankumarsanghi"]); // profile repo
+const EXCLUDED = new Set(["kirtankumarsanghi", "portfolio"]); // profile repo and this site's own repo
 
 type Repo = {
   name: string;
@@ -88,14 +88,22 @@ async function main() {
 // keep the override list in sync without importing TS from a script context
 const OVERRIDE_NAMES = new Set([
   "Nirixon",
-  "ResQSync",
-  "Cognivia",
-  "Taalmel-Sync",
-  "Echona",
-  "Saarthi_Smart_Resource_Allocation_Platform",
-  "Unbiased-ai",
+  "EVision",
+  "cognivia",
+  "SafePath",
+  "resQsync",
+  "Pricing-the-Game",
   "THRYVE",
   "UNISPHERE",
+  "cerevia",
+  "Unbiased-ai",
+  "Locus",
+  "polarsync-edge",
+  "TaalMel-Sync",
+  "TaalMel-Health",
+  "vestiq",
+  "Echona",
+  "Saarthi_Smart_Resource_Allocation_Platform",
 ]);
 const hasOverride = (name: string) => OVERRIDE_NAMES.has(name);
 

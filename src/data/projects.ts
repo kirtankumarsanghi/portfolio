@@ -24,9 +24,9 @@ export type RepoData = {
   languages?: Record<string, number>;
 };
 
-const EXCLUDED = new Set(["kirtankumarsanghi"]); // the profile repo
+const EXCLUDED = new Set(["kirtankumarsanghi", "portfolio"]); // the profile repo and this site's own repo
 
-const repos = (raw as RepoData[]).filter((r) => !EXCLUDED.has(r.name));
+const repos = (raw as unknown as RepoData[]).filter((r) => !EXCLUDED.has(r.name));
 
 export type Project = {
   id: string;

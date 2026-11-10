@@ -299,11 +299,778 @@ function TaalmelMock() {
   );
 }
 
+/* ------------------------------ EVision ------------------------------ */
+function EvisionMock() {
+  const cities: [string, number][] = [
+    ["Delhi", 92],
+    ["Bengaluru", 88],
+    ["Pune", 81],
+    ["Guwahati", 76],
+    ["Surat", 72],
+  ];
+  const bubbles: [number, number, number][] = [
+    [88, 72, 9],
+    [96, 128, 6],
+    [74, 150, 5],
+    [130, 96, 4],
+    [62, 104, 4],
+    [110, 182, 3],
+    [146, 138, 3],
+  ];
+  return (
+    <Frame title="evision / hotspot ranking" right="51 CITIES · CDS">
+      <div className="flex h-full">
+        <div className="relative w-[292px] shrink-0 border-r border-white/[0.08]">
+          <svg viewBox="0 0 292 314" className="absolute inset-0 h-full w-full">
+            <defs>
+              <pattern id="ev-grid" width="22" height="22" patternUnits="userSpaceOnUse">
+                <path d="M22 0H0v22" fill="none" stroke="#fff" strokeOpacity="0.04" />
+              </pattern>
+            </defs>
+            <rect width="292" height="314" fill="url(#ev-grid)" />
+            <path d="M104 44 L156 58 L172 112 L142 168 L110 196 L74 158 L82 104 Z" fill="#fff" fillOpacity="0.05" stroke="#fff" strokeOpacity="0.16" />
+            <path d="M172 112 L210 126 L198 176 L142 168 Z" fill="#c6ff00" fillOpacity="0.07" stroke="#c6ff00" strokeOpacity="0.35" />
+            <path d="M110 196 L142 168 L198 176 L180 246 L120 258 L92 226 Z" fill="#fff" fillOpacity="0.03" stroke="#fff" strokeOpacity="0.12" />
+            {bubbles.map(([x, y, r], i) => (
+              <g key={i}>
+                <circle cx={x} cy={y} r={r * 1.8} fill="#c6ff00" fillOpacity="0.08" />
+                <circle cx={x} cy={y} r={r} fill={i === 0 ? "#c6ff00" : "#7fe3ff"} fillOpacity={i === 0 ? 0.9 : 0.65} />
+              </g>
+            ))}
+          </svg>
+          <span className="absolute top-[10px] left-[10px] rounded-[3px] bg-[#0a0c11]/85 px-[7px] py-[3px] font-mono text-[7.5px] tracking-[0.08em] text-white/70">COMPOSITE DEMAND SCORE</span>
+          <span className="absolute bottom-[10px] left-[10px] rounded-[3px] bg-[#0a0c11]/85 px-[7px] py-[3px] font-mono text-[7.5px] tracking-[0.08em] text-white/45">3,519 CITY-MONTHS · 96.9% OBSERVED</span>
+        </div>
+        <div className="flex-1 px-[14px] py-[10px]">
+          <Label>Priority cities</Label>
+          <div className="mt-[9px] space-y-[9px]">
+            {cities.map(([name, score], i) => (
+              <div key={name}>
+                <div className="flex items-baseline justify-between text-[9.5px]">
+                  <span className={i < 2 ? "text-white" : "text-white/65"}>{name}</span>
+                  <span className="font-mono text-[8px]" style={{ color: i < 2 ? "#c6ff00" : "rgba(255,255,255,0.55)" }}>{score}</span>
+                </div>
+                <span className="mt-[4px] block h-[5px] w-full rounded-full bg-white/[0.07]">
+                  <span className="block h-full rounded-full" style={{ width: `${score}%`, background: i < 2 ? "linear-gradient(90deg,#2a3fd6,#c6ff00)" : "#2a3fd6" }} />
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-[13px] flex gap-[6px]">
+            <span className="rounded-[3px] border border-[#c6ff00]/50 px-[6px] py-[3px] font-mono text-[7.5px] tracking-[0.08em] text-[#c6ff00]">3W + 4W DEMAND</span>
+            <span className="rounded-[3px] border border-white/20 px-[6px] py-[3px] font-mono text-[7.5px] tracking-[0.08em] text-white/55">MONTE CARLO · 1K</span>
+          </div>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ------------------------------ SafePath ------------------------------ */
+function SafePathMock() {
+  const blocked = new Set(["2,2", "3,2", "4,2", "9,1", "9,2", "9,3", "14,4", "15,4", "16,4", "5,7", "6,7", "7,7", "11,8", "12,8", "13,8", "17,2"]);
+  const path = "27.5,77.5 72.5,77.5 72.5,122.5 117.5,122.5 117.5,167.5 162.5,167.5 162.5,212.5 207.5,212.5 207.5,167.5 252.5,167.5 252.5,122.5 282.5,122.5";
+  return (
+    <Frame title="safepath / simulator" right="MANHATTAN · 60 NODES">
+      <div className="flex h-full">
+        <div className="relative flex-1 border-r border-white/[0.08] bg-[#080b12]">
+          <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
+            {Array.from({ length: 180 }, (_, i) => {
+              const c = i % 18;
+              const r = Math.floor(i / 18);
+              const x = 17.5 + c * 15;
+              const y = 47.5 + r * 15;
+              const key = `${c},${r}`;
+              const wall = blocked.has(key);
+              const onPath = path.includes(`${x},${y}`);
+              return (
+                <rect
+                  key={key}
+                  x={x - 6.4}
+                  y={y - 6.4}
+                  width="12.8"
+                  height="12.8"
+                  fill={wall ? "#ffffff" : onPath ? "#c6ff00" : "#7d93ff"}
+                  fillOpacity={wall ? 0.72 : onPath ? 0.9 : 0.12}
+                />
+              );
+            })}
+            <polyline points={path} fill="none" stroke="#c6ff00" strokeWidth="2.4" strokeLinejoin="round" strokeLinecap="round" />
+            <circle cx="27.5" cy="77.5" r="5" fill="#c6ff00" />
+            <circle cx="282.5" cy="122.5" r="5" fill="#0a0c11" stroke="#c6ff00" strokeWidth="2" />
+            <circle cx="162.5" cy="167.5" r="7" fill="#ff6b4a" fillOpacity="0.85" />
+            <text x="22" y="70" fill="#05070a" fontFamily="monospace" fontSize="7" fontWeight="700">P1</text>
+            <text x="270" y="114" fill="#c6ff00" fontFamily="monospace" fontSize="7" fontWeight="700">E1</text>
+            <text x="169" y="196" fill="#ff9f86" fontFamily="monospace" fontSize="6.5">FIRE</text>
+          </svg>
+          <span className="absolute top-[10px] left-[10px] rounded-[3px] bg-[#0a0c11]/90 px-[7px] py-[3px] font-mono text-[7.5px] tracking-[0.08em] text-white/70">A* SEARCH · STEP 14 / 24</span>
+        </div>
+        <div className="w-[196px] shrink-0 px-[12px] py-[10px]">
+          <Label>Node scores</Label>
+          <div className="mt-[8px] grid grid-cols-3 gap-[4px] text-center">
+            {[
+              ["g", "6.0"],
+              ["h", "4.0"],
+              ["f", "10.0"],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-[4px] border border-white/[0.08] bg-white/[0.03] px-[4px] py-[5px]">
+                <p className="font-mono text-[7px] text-white/40">{k}</p>
+                <p className="font-mono text-[9px] text-white">{v}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-[11px]">
+            <Label>Heuristic</Label>
+            <div className="mt-[6px] space-y-[4px]">
+              {["Manhattan", "Euclidean", "Chebyshev"].map((h, i) => (
+                <div key={h} className={`flex items-center justify-between rounded-[3px] border px-[7px] py-[4px] text-[8.5px] ${i === 0 ? "border-[#c6ff00]/50 bg-[#c6ff00]/[0.06] text-white" : "border-white/[0.08] text-white/55"}`}>
+                  {h}
+                  {i === 0 && <span className="font-mono text-[7px] text-[#c6ff00]">MIN</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-[11px] rounded-[4px] border border-white/[0.1] bg-white/[0.03] p-[8px]">
+            <p className="text-[9px] text-white/80">Exit reached</p>
+            <p className="mt-[3px] font-mono text-[7.5px] tracking-[0.06em] text-[#c6ff00]">COST 10.00 · 15 EXPLORED</p>
+          </div>
+          <p className="mt-[10px] font-mono text-[7.5px] tracking-[0.06em] text-white/35">WORKER THREAD · UI FREE</p>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* --------------------------- Pricing the Game --------------------------- */
+function PricingMock() {
+  const cells = [
+    ["80, 80", "25, 110"],
+    ["110, 25", "40, 40"],
+  ];
+  return (
+    <Frame title="pricing-the-game / chapter 1" right="ONE-SHOT GAME">
+      <div className="flex h-full">
+        <div className="flex-1 px-[14px] py-[10px]">
+          <Label>Payoff matrix · ₹ lakh</Label>
+          <div className="mt-[8px] grid grid-cols-[1.1fr_1fr_1fr] gap-[3px]">
+            <span />
+            <span className="py-[3px] text-center font-mono text-[7.5px] tracking-[0.06em] text-white/40">YUMMLY ₹49</span>
+            <span className="py-[3px] text-center font-mono text-[7.5px] tracking-[0.06em] text-white/40">YUMMLY ₹19</span>
+            <span className="flex items-center font-mono text-[7.5px] tracking-[0.06em] text-white/40">QB ₹49</span>
+            {cells[0].map((v, j) => (
+              <span key={j} className={`flex h-[62px] items-center justify-center rounded-[3px] border text-[14px] font-light ${j === 0 ? "border-white/[0.09] text-white/70" : "border-white/[0.09] text-white/55"}`}>
+                {v}
+              </span>
+            ))}
+            <span className="flex items-center font-mono text-[7.5px] tracking-[0.06em] text-white/40">QB ₹19</span>
+            {cells[1].map((v, j) => (
+              <span key={j} className={`flex h-[62px] items-center justify-center rounded-[3px] border text-[14px] font-light ${j === 1 ? "border-[#c6ff00] bg-[#c6ff00]/[0.08] text-[#c6ff00]" : "border-white/[0.09] text-white/55"}`}>
+                {v}
+              </span>
+            ))}
+          </div>
+          <div className="mt-[9px] flex gap-[5px]">
+            {["BEST RESPONSE", "DOMINANCE", "PARETO VS NASH"].map((t, i) => (
+              <span key={t} className={`rounded-[3px] border px-[5px] py-[3px] font-mono text-[6.5px] tracking-[0.05em] ${i === 2 ? "border-[#c6ff00]/60 text-[#c6ff00]" : "border-white/15 text-white/55"}`}>
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="w-[168px] shrink-0 border-l border-white/[0.08] px-[12px] py-[10px]">
+          <Label>Board confidence</Label>
+          <div className="mt-[4px] flex items-baseline gap-[7px]">
+            <span className="text-[28px] leading-none font-light text-white">100</span>
+            <span className="font-mono text-[8px] text-[#c6ff00]">STABLE</span>
+          </div>
+          <div className="mt-[10px]">
+            <Label>δ · patience</Label>
+            <div className="mt-[5px] h-[5px] w-full rounded-full bg-white/[0.08]">
+              <span className="block h-full w-[58%] rounded-full" style={{ background: "linear-gradient(90deg,#2a3fd6,#c6ff00)" }} />
+            </div>
+            <p className="mt-[4px] font-mono text-[7px] text-white/40">0.58 · THRESHOLD 0.429</p>
+          </div>
+          <div className="mt-[12px] rounded-[4px] border border-white/[0.1] bg-white/[0.03] p-[8px]">
+            <p className="text-[8.5px] text-white/75">Nash equilibrium</p>
+            <p className="mt-[3px] font-mono text-[7px] text-[#c6ff00]">BOTH DISCOUNT · 40, 40</p>
+          </div>
+          <p className="mt-[9px] font-mono text-[7px] leading-[1.7] text-white/35">COOPERATE 80, 80<br />PROFIT DESTROYED 50%</p>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ------------------------------ Cerevia ------------------------------ */
+function CereviaMock() {
+  const mood = [0.42, 0.55, 0.48, 0.62, 0.58, 0.71, 0.66, 0.78, 0.72, 0.83];
+  const line = mood.map((v, i) => `${(i / 9) * 180},${72 - v * 58}`).join(" ");
+  return (
+    <Frame title="cerevia / dashboard" right="MOOD · JOURNAL · TASKS">
+      <div className="flex h-full">
+        <div className="w-[318px] shrink-0 border-r border-white/[0.08] px-[14px] py-[10px]">
+          <Label>Mood · last 10 days</Label>
+          <div className="mt-[5px] flex items-baseline gap-[8px]">
+            <span className="text-[28px] leading-none font-light text-white">7.8</span>
+            <span className="font-mono text-[8px] text-[#c6ff00]">▲ CALM</span>
+          </div>
+          <svg viewBox="0 0 180 80" preserveAspectRatio="none" className="mt-[4px] h-[70px] w-full">
+            <defs>
+              <linearGradient id="cv-area" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#3d5bff" stopOpacity="0.45" />
+                <stop offset="100%" stopColor="#3d5bff" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <polyline points={`0,80 ${line} 180,80`} fill="url(#cv-area)" stroke="none" />
+            <polyline points={line} fill="none" stroke="#c6ff00" strokeWidth="1.6" strokeLinejoin="round" />
+          </svg>
+          <div className="mt-[8px] grid grid-cols-4 gap-[4px]">
+            {["MON", "TUE", "WED", "THU"].map((d, i) => (
+              <div key={d} className="rounded-[3px] border border-white/[0.07] px-[4px] py-[4px] text-center">
+                <p className="font-mono text-[6.5px] text-white/35">{d}</p>
+                <p className="mt-[3px] text-[8.5px]" style={{ color: i === 3 ? "#c6ff00" : "rgba(255,255,255,0.6)" }}>{["6.1", "6.8", "7.0", "7.8"][i]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex-1 px-[14px] py-[10px]">
+          <Label>Journal · today</Label>
+          <div className="mt-[6px] rounded-[4px] border border-white/[0.09] bg-white/[0.03] p-[8px]">
+            <p className="text-[9px] leading-[1.55] text-white/70">Slept better. The grounding routine before the stand-up actually helped.</p>
+            <p className="mt-[5px] font-mono text-[6.5px] tracking-[0.06em] text-white/30">SAVED · 08:42</p>
+          </div>
+          <Label>Tasks</Label>
+          <div className="mt-[6px] space-y-[4px]">
+            {[
+              ["Breathing · 4 min", true],
+              ["Evening journal", true],
+              ["Walk · 20 min", false],
+            ].map(([t, done]) => (
+              <div key={String(t)} className="flex items-center gap-[7px] rounded-[3px] border border-white/[0.07] px-[7px] py-[5px] text-[8.5px] text-white/70">
+                <span className={`flex h-[9px] w-[9px] items-center justify-center rounded-[2px] border text-[6px] ${done ? "border-[#c6ff00] bg-[#c6ff00] text-[#05070a]" : "border-white/30"}`}>
+                  {done ? "✓" : ""}
+                </span>
+                {t}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ------------------------------- Locus ------------------------------- */
+function LocusMock() {
+  const seats = Array.from({ length: 48 }, (_, i) => (i * 7 + 3) % 11);
+  return (
+    <Frame title="locus / floor 3" right="LIVE · 42/60 SEATS">
+      <div className="flex h-full">
+        <div className="flex-1 border-r border-white/[0.08] px-[14px] py-[10px]">
+          <div className="flex items-center justify-between">
+            <Label>Live floor map</Label>
+            <span className="font-mono text-[7px] text-[#c6ff00]">SOCKET · 13 EVENTS</span>
+          </div>
+          <div className="mt-[8px] grid grid-cols-8 gap-[4px]">
+            {seats.map((s, i) => (
+              <span
+                key={i}
+                className="block h-[22px] rounded-[2px] border"
+                style={{
+                  borderColor: s < 2 ? "#c6ff00" : s < 4 ? "#7d93ff" : "rgba(255,255,255,0.12)",
+                  background: s < 2 ? "rgba(198,255,0,0.18)" : s < 4 ? "rgba(125,147,255,0.16)" : "rgba(255,255,255,0.03)",
+                }}
+              />
+            ))}
+          </div>
+          <div className="mt-[8px] flex gap-[10px] font-mono text-[6.5px] text-white/40">
+            <span><i className="mr-[4px] inline-block h-[5px] w-[5px] bg-[#c6ff00]" />OCCUPIED</span>
+            <span><i className="mr-[4px] inline-block h-[5px] w-[5px] bg-[#7d93ff]" />AWAY</span>
+            <span><i className="mr-[4px] inline-block h-[5px] w-[5px] bg-white/20" />FREE</span>
+          </div>
+        </div>
+        <div className="w-[180px] shrink-0 px-[12px] py-[10px]">
+          <Label>Seat recommendation</Label>
+          <div className="mt-[6px] rounded-[4px] border border-[#c6ff00]/40 bg-[#c6ff00]/[0.05] p-[8px]">
+            <p className="text-[9px] text-white">Desk B-14 · Zone 2</p>
+            <p className="mt-[3px] font-mono text-[7px] text-[#c6ff00]">SCORE 0.91 · QUIET</p>
+          </div>
+          <div className="mt-[10px] space-y-[5px]">
+            {[
+              ["Previous usage", "40%"],
+              ["Preferred zone", "25%"],
+              ["Availability", "15%"],
+              ["Noise match", "10%"],
+            ].map(([k, v]) => (
+              <div key={k} className="flex items-center justify-between text-[7.5px] text-white/55">
+                {k}
+                <span className="font-mono text-white/35">{v}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-[11px] rounded-[4px] border border-white/[0.1] bg-white/[0.03] p-[7px]">
+            <p className="font-mono text-[6.5px] tracking-[0.06em] text-white/35">SESSION LIFECYCLE</p>
+            <p className="mt-[4px] font-mono text-[7px] leading-[1.7] text-white/60">OCCUPIED → AWAY<br />→ ABANDONED → RESET</p>
+          </div>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ---------------------------- PolarSync Edge ---------------------------- */
+function PolarsyncMock() {
+  const bars = [46, 58, 34, 72, 64, 88, 76, 54, 62, 81, 70, 58];
+  return (
+    <Frame title="polarsync / station command" right="−28.4°C · OFFLINE">
+      <div className="flex h-full">
+        <div className="flex-1 border-r border-white/[0.08] px-[14px] py-[10px]">
+          <div className="flex items-center justify-between">
+            <Label>Microgrid · 24h</Label>
+            <span className="font-mono text-[7px] text-[#c6ff00]">ONNX · &lt;20 MS</span>
+          </div>
+          <div className="mt-[8px] flex h-[104px] items-end gap-[5px] border-b border-white/[0.08] pb-[4px]">
+            {bars.map((v, i) => (
+              <span key={i} className="flex-1" style={{ height: `${v}%`, background: i > 7 ? "#c6ff00" : i > 4 ? "#7fe3ff" : "rgba(255,255,255,0.16)" }} />
+            ))}
+          </div>
+          <div className="mt-[8px] grid grid-cols-3 gap-[5px]">
+            {[
+              ["SOLAR", "520 kWh/d"],
+              ["DEMAND", "900 kWh/d"],
+              ["BATTERY", "72%"],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-[3px] border border-white/[0.07] px-[6px] py-[5px]">
+                <p className="font-mono text-[6px] tracking-[0.07em] text-white/35">{k}</p>
+                <p className="mt-[3px] font-mono text-[8px] text-white/75">{v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-[190px] shrink-0 px-[12px] py-[10px]">
+          <Label>Load criticality</Label>
+          <div className="mt-[7px] space-y-[5px]">
+            {[
+              ["Tier 1 · Life safety", "LOCKED", true],
+              ["Tier 2 · Science", "SHIFT", false],
+              ["Tier 3 · Non-critical", "SHED", false],
+            ].map(([t, s, locked]) => (
+              <div key={String(t)} className="flex items-center justify-between rounded-[3px] border border-white/[0.08] px-[7px] py-[5px] text-[8px] text-white/65">
+                {t}
+                <span className="font-mono text-[6.5px]" style={{ color: locked ? "#c6ff00" : "rgba(255,255,255,0.4)" }}>{s}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-[10px] rounded-[4px] border border-[#c6ff00]/40 bg-[#c6ff00]/[0.05] p-[8px]">
+            <p className="text-[8.5px] text-white/85">Battery reserve ring-fence</p>
+            <p className="mt-[3px] font-mono text-[7px] text-[#c6ff00]">30% · NEVER SHED</p>
+          </div>
+          <p className="mt-[9px] font-mono text-[6.5px] leading-[1.7] text-white/35">AUDIT LEDGER · IMMUTABLE<br />HUMAN INTERLOCK · ON</p>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* --------------------------- Taalmel Health --------------------------- */
+function TaalmelHealthMock() {
+  const rows: [string, string, string, string][] = [
+    ["lisinopril + spironolactone", "hyperkalemia risk", "MAJOR", "#c6ff00"],
+    ["E11.9 / E11.65", "same category · diabetes", "DUPLICATE", "#7d93ff"],
+    ["paracetamol + warfarin", "moderate interaction", "REVIEW", "#ffd27d"],
+    ["\"Herbal blend X\"", "coverage unknown", "NOT_COVERED", "#ffffff"],
+  ];
+  return (
+    <Frame title="taalmel / reconcile" right="3 PROVIDERS · 6 FLAGS">
+      <div className="flex h-full">
+        <div className="flex-1 border-r border-white/[0.08] px-[14px] py-[10px]">
+          <Label>Reconciliation report · patient P001</Label>
+          <div className="mt-[8px] space-y-[5px]">
+            {rows.map(([a, b, tag, c]) => (
+              <div key={a} className="rounded-[4px] border border-white/[0.08] bg-white/[0.02] px-[8px] py-[6px]">
+                <div className="flex items-center justify-between gap-[8px]">
+                  <p className="truncate text-[9px] text-white/80">{a}</p>
+                  <span className="shrink-0 rounded-[3px] border px-[5px] py-[2px] font-mono text-[6px] tracking-[0.06em]" style={{ borderColor: `${c}66`, color: c }}>
+                    {tag}
+                  </span>
+                </div>
+                <p className="mt-[3px] font-mono text-[6.5px] text-white/35">{b}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-[184px] shrink-0 px-[12px] py-[10px]">
+          <Label>Point of care</Label>
+          <div className="mt-[6px] rounded-[4px] border border-[#c6ff00]/40 bg-[#c6ff00]/[0.05] p-[8px]">
+            <p className="text-[9px] text-white">Safe to proceed</p>
+            <p className="mt-[3px] font-mono text-[7px] text-[#c6ff00]">FALSE · UNKNOWN DRUG</p>
+          </div>
+          <div className="mt-[10px] space-y-[5px]">
+            {[
+              ["Free-text parse", "Dolo 650mg BD"],
+              ["Brand → generic", "paracetamol"],
+              ["Household mix-up", "DOSE RISK"],
+            ].map(([k, v]) => (
+              <div key={k} className="flex items-center justify-between text-[7.5px] text-white/55">
+                {k}
+                <span className="font-mono text-[6.5px] text-white/40">{v}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-[10px] rounded-[4px] border border-white/[0.1] bg-white/[0.03] p-[7px]">
+            <p className="font-mono text-[6.5px] tracking-[0.06em] text-white/35">MCP · 6 TOOLS</p>
+            <p className="mt-[4px] font-mono text-[7px] leading-[1.7] text-white/60">NARRATE FROM<br />CITED OUTPUT ONLY</p>
+          </div>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ------------------------------- VestIQ ------------------------------- */
+function VestiqMock() {
+  const values = [0.22, 0.3, 0.27, 0.38, 0.42, 0.4, 0.52, 0.49, 0.61, 0.58, 0.68, 0.74];
+  const line = values.map((v, i) => `${(i / 11) * 276},${88 - v * 76}`).join(" ");
+  return (
+    <Frame title="vestiq / portfolio" right="GOALS · INSIGHTS">
+      <div className="flex h-full">
+        <div className="flex-1 border-r border-white/[0.08] px-[14px] py-[10px]">
+          <Label>Portfolio value</Label>
+          <div className="mt-[4px] flex items-baseline gap-[8px]">
+            <span className="text-[26px] leading-none font-light text-white">₹8.42L</span>
+            <span className="font-mono text-[8px] text-[#c6ff00]">▲ 12.4%</span>
+          </div>
+          <svg viewBox="0 0 276 94" preserveAspectRatio="none" className="mt-[4px] h-[86px] w-full">
+            <defs>
+              <linearGradient id="vq-area" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#c6ff00" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#c6ff00" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <polyline points={`0,94 ${line} 276,94`} fill="url(#vq-area)" stroke="none" />
+            <polyline points={line} fill="none" stroke="#c6ff00" strokeWidth="1.8" strokeLinejoin="round" />
+          </svg>
+          <div className="mt-[7px] grid grid-cols-3 gap-[5px]">
+            {[
+              ["EQUITY", "58%"],
+              ["DEBT", "27%"],
+              ["CASH", "15%"],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-[3px] border border-white/[0.07] px-[6px] py-[5px]">
+                <p className="font-mono text-[6px] tracking-[0.07em] text-white/35">{k}</p>
+                <p className="mt-[3px] font-mono text-[8px] text-white/75">{v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-[174px] shrink-0 px-[12px] py-[10px]">
+          <Label>Goals</Label>
+          <div className="mt-[7px] space-y-[5px]">
+            {[
+              ["Emergency fund", "82%"],
+              ["House deposit", "46%"],
+              ["Travel fund", "68%"],
+            ].map(([g, p]) => (
+              <div key={g} className="rounded-[3px] border border-white/[0.08] px-[7px] py-[5px]">
+                <div className="flex items-center justify-between text-[7.5px] text-white/65">
+                  {g}
+                  <span className="font-mono text-[6.5px] text-white/35">{p}</span>
+                </div>
+                <span className="mt-[3px] block h-[3px] w-full rounded-full bg-white/[0.07]">
+                  <span className="block h-full rounded-full bg-[#c6ff00]" style={{ width: p }} />
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-[10px] font-mono text-[6.5px] leading-[1.7] text-white/35">JWT SESSION · MONGOOSE<br />INSIGHTS FROM LIVE RECORDS</p>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ------------------------------- THRYVE ------------------------------- */
+function ThryveMock() {
+  const rows: [string, string, string][] = [
+    ["Expand enterprise pipeline", "25%", "PENDING"],
+    ["Cut onboarding time 20%", "20%", "APPROVED"],
+    ["Ship Q3 analytics suite", "20%", "PENDING"],
+    ["Reduce support backlog", "15%", "APPROVED"],
+    ["Mentor two juniors", "20%", "IN REVIEW"],
+  ];
+  return (
+    <Frame title="thryve / approvals" right="Q3 · 4 PENDING">
+      <div className="flex h-full">
+        <div className="flex-1 px-[14px] py-[10px]">
+          <div className="flex items-center justify-between">
+            <Label>Goal approval queue</Label>
+            <span className="font-mono text-[7px] text-[#c6ff00]">WEIGHT CAP 100%</span>
+          </div>
+          <div className="mt-[7px] grid grid-cols-[1fr_50px_66px] border-b border-white/[0.08] pb-[4px] font-mono text-[6.5px] tracking-[0.08em] text-white/30">
+            <span>GOAL</span>
+            <span>WEIGHT</span>
+            <span className="text-right">STATUS</span>
+          </div>
+          {rows.map(([g, w, s]) => (
+            <div key={g} className="grid h-[30px] grid-cols-[1fr_50px_66px] items-center border-b border-white/[0.05] text-[8.5px] text-white/70">
+              <span className="truncate">{g}</span>
+              <span className="font-mono text-[7.5px] text-white/45">{w}</span>
+              <span className="flex justify-end">
+                <span className={`rounded-[3px] border px-[5px] py-[2px] font-mono text-[6px] tracking-[0.05em] ${s === "APPROVED" ? "border-[#c6ff00]/50 text-[#c6ff00]" : s === "PENDING" ? "border-white/20 text-white/60" : "border-[#7d93ff]/60 text-[#9ab4ff]"}`}>
+                  {s}
+                </span>
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="w-[172px] shrink-0 border-l border-white/[0.08] px-[12px] py-[10px]">
+          <Label>Org analytics</Label>
+          <div className="mt-[4px] flex items-baseline gap-[7px]">
+            <span className="text-[26px] leading-none font-light text-white">78%</span>
+            <span className="font-mono text-[7px] text-[#c6ff00]">ON TRACK</span>
+          </div>
+          <div className="mt-[9px] space-y-[5px]">
+            {[
+              ["Engineering", "84%"],
+              ["Product", "72%"],
+              ["Operations", "66%"],
+            ].map(([d, v]) => (
+              <div key={d} className="flex items-center gap-[6px]">
+                <span className="w-[58px] text-[7.5px] text-white/55">{d}</span>
+                <span className="h-[4px] flex-1 rounded-full bg-white/[0.07]">
+                  <span className="block h-full rounded-full bg-[#7d93ff]" style={{ width: v }} />
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-[10px] rounded-[4px] border border-white/[0.1] bg-white/[0.03] p-[7px]">
+            <p className="font-mono text-[6.5px] tracking-[0.06em] text-white/35">AUDIT LOG</p>
+            <p className="mt-[4px] font-mono text-[6.5px] leading-[1.7] text-white/55">CREATED · UPDATED<br />APPROVED · UNLOCKED</p>
+          </div>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ------------------------------ UNISPHERE ------------------------------ */
+function UnisphereMock() {
+  const colleges: [string, string, string, string][] = [
+    ["IIT Delhi", "₹2.2L", "₹25.0L", "4.7"],
+    ["NIT Trichy", "₹1.6L", "₹18.2L", "4.5"],
+    ["IIIT Hyderabad", "₹3.1L", "₹32.0L", "4.8"],
+  ];
+  return (
+    <Frame title="unisphere / compare" right="3 COLLEGES">
+      <div className="px-[14px] py-[10px]">
+        <div className="flex items-center justify-between">
+          <Label>Side-by-side comparison</Label>
+          <span className="font-mono text-[7px] text-[#c6ff00]">BEST VALUE HIGHLIGHTED</span>
+        </div>
+        <div className="mt-[8px] grid grid-cols-[1fr_1fr_1fr] gap-[6px]">
+          {colleges.map(([name, fees, pkg, rating], i) => (
+            <div key={name} className={`rounded-[4px] border p-[8px] ${i === 2 ? "border-[#c6ff00]/50 bg-[#c6ff00]/[0.05]" : "border-white/[0.09] bg-white/[0.02]"}`}>
+              <p className="text-[9.5px] text-white">{name}</p>
+              <p className="mt-[2px] font-mono text-[6.5px] text-white/35">{i === 0 ? "IIT · NEW DELHI" : i === 1 ? "NIT · TAMIL NADU" : "IIIT · TELANGANA"}</p>
+              <div className="mt-[7px] space-y-[4px]">
+                <div className="flex justify-between font-mono text-[7px] text-white/45"><span>FEES</span><span className="text-white/75">{fees}</span></div>
+                <div className="flex justify-between font-mono text-[7px] text-white/45"><span>AVG PKG</span><span style={{ color: i === 2 ? "#c6ff00" : "rgba(255,255,255,0.75)" }}>{pkg}</span></div>
+                <div className="flex justify-between font-mono text-[7px] text-white/45"><span>RATING</span><span style={{ color: i === 2 ? "#c6ff00" : "rgba(255,255,255,0.75)" }}>{rating}</span></div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-[10px] grid grid-cols-[1.2fr_1fr] gap-[8px]">
+          <div className="rounded-[4px] border border-white/[0.08] bg-white/[0.02] p-[8px]">
+            <p className="font-mono text-[6.5px] tracking-[0.07em] text-white/35">PREDICTOR · JEE ADVANCED</p>
+            <p className="mt-[4px] text-[9px] text-white/75">Rank 1,240 → 6 matched courses</p>
+            <p className="mt-[2px] font-mono text-[6.5px] text-[#c6ff00]">CLOSEST CLOSING RANK FIRST</p>
+          </div>
+          <div className="rounded-[4px] border border-white/[0.08] bg-white/[0.02] p-[8px]">
+            <p className="font-mono text-[6.5px] tracking-[0.07em] text-white/35">DATASET</p>
+            <p className="mt-[4px] font-mono text-[7px] leading-[1.7] text-white/60">177 COLLEGES<br />1,239 COURSES · 531 REVIEWS</p>
+          </div>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ----------------------------- Unbiased AI ----------------------------- */
+function UnbiasedMock() {
+  const metrics: [string, string][] = [
+    ["DEMOGRAPHIC PARITY", "0.04"],
+    ["EQUALIZED ODDS", "0.07"],
+    ["DISPARATE IMPACT", "0.91"],
+    ["CALIBRATION", "0.96"],
+  ];
+  return (
+    <Frame title="unbiased-ai / fairness" right="AUDIT · LIVE">
+      <div className="flex h-full">
+        <div className="flex-1 border-r border-white/[0.08] px-[14px] py-[10px]">
+          <Label>Fairness metrics</Label>
+          <div className="mt-[7px] grid grid-cols-2 gap-[5px]">
+            {metrics.map(([k, v]) => (
+              <div key={k} className="rounded-[4px] border border-white/[0.08] bg-white/[0.02] px-[7px] py-[6px]">
+                <p className="font-mono text-[6px] tracking-[0.06em] text-white/35">{k}</p>
+                <p className="mt-[3px] font-mono text-[11px] text-[#c6ff00]">{v}</p>
+              </div>
+            ))}
+          </div>
+          <Label>Subgroup heatmap</Label>
+          <div className="mt-[6px] grid grid-cols-12 gap-[2px]">
+            {Array.from({ length: 48 }, (_, i) => (
+              <span key={i} className="block h-[12px] rounded-[1px]" style={{ background: heat(rnd(i + 11)) }} />
+            ))}
+          </div>
+        </div>
+        <div className="w-[176px] shrink-0 px-[12px] py-[10px]">
+          <Label>Model registry</Label>
+          <div className="mt-[6px] space-y-[4px]">
+            {[
+              ["credit-v4", "FAIR"],
+              ["hiring-v2", "REVIEW"],
+              ["claims-v7", "FAIR"],
+            ].map(([m, s]) => (
+              <div key={m} className="flex items-center justify-between rounded-[3px] border border-white/[0.08] px-[7px] py-[4px] text-[8px] text-white/65">
+                <span className="font-mono">{m}</span>
+                <span className="font-mono text-[6.5px]" style={{ color: s === "FAIR" ? "#c6ff00" : "#ffd27d" }}>{s}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-[10px] rounded-[4px] border border-[#c6ff00]/35 bg-[#c6ff00]/[0.05] p-[7px]">
+            <p className="font-mono text-[6.5px] text-[#c6ff00]">POLICY THRESHOLD</p>
+            <p className="mt-[3px] text-[8px] text-white/75">DP gap &lt; 0.05 · pass</p>
+          </div>
+          <p className="mt-[9px] font-mono text-[6.5px] leading-[1.7] text-white/35">SHAP · PROXY VARIABLES<br />EU AI ACT EXPORTS</p>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ------------------------------- Echona ------------------------------- */
+function EchonaMock() {
+  const wave = Array.from({ length: 34 }, (_, i) => 8 + Math.abs(Math.sin(i * 0.8)) * 30);
+  return (
+    <Frame title="echona / mood session" right="FACE + VOICE + TEXT">
+      <div className="flex h-full">
+        <div className="flex-1 border-r border-white/[0.08] px-[14px] py-[10px]">
+          <Label>Voice signal · live</Label>
+          <div className="mt-[8px] flex h-[58px] items-center gap-[2px]">
+            {wave.map((h, i) => (
+              <span key={i} className="flex-1 rounded-full" style={{ height: h, background: i % 5 === 0 ? "#c6ff00" : "#7d93ff", opacity: 0.85 }} />
+            ))}
+          </div>
+          <Label>Fused emotion</Label>
+          <div className="mt-[7px] space-y-[6px]">
+            {[
+              ["Calm", 0.72],
+              ["Joy", 0.54],
+              ["Stress", 0.21],
+            ].map(([k, v], i) => (
+              <div key={String(k)} className="flex items-center gap-[7px]">
+                <span className="w-[44px] text-[8px] text-white/60">{k}</span>
+                <span className="h-[5px] flex-1 rounded-full bg-white/[0.07]">
+                  <span className="block h-full rounded-full" style={{ width: `${Number(v) * 100}%`, background: i === 0 ? "#c6ff00" : i === 1 ? "#7fe3ff" : "#ff9f86" }} />
+                </span>
+                <span className="w-[24px] text-right font-mono text-[7px] text-white/45">{Number(v).toFixed(2)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-[190px] shrink-0 px-[12px] py-[10px]">
+          <Label>Recommendation · calm</Label>
+          <div className="mt-[6px] space-y-[4px]">
+            {[
+              ["Weightless", "Marconi Union"],
+              ["Sunset Lover", "Petit Biscuit"],
+              ["Bloom", "The Paper Kites"],
+            ].map(([t, a], i) => (
+              <div key={t} className="flex items-center gap-[6px] rounded-[3px] border border-white/[0.07] px-[6px] py-[5px]">
+                <span className="flex h-[14px] w-[14px] items-center justify-center rounded-full border border-[#c6ff00]/50 font-mono text-[6px] text-[#c6ff00]">{i + 1}</span>
+                <span className="min-w-0">
+                  <span className="block truncate text-[8px] text-white/75">{t}</span>
+                  <span className="block truncate font-mono text-[6px] text-white/35">{a}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-[9px] rounded-[4px] border border-white/[0.1] bg-white/[0.03] p-[7px]">
+            <p className="font-mono text-[6.5px] tracking-[0.06em] text-white/35">FUSION</p>
+            <p className="mt-[4px] font-mono text-[6.5px] leading-[1.7] text-white/55">CONFIDENCE + SOURCE<br />FOR EVERY PREDICTION</p>
+          </div>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ------------------------------- Saarthi ------------------------------- */
+function SaarthiMock() {
+  const needs: [string, string, string][] = [
+    ["Drinking water · Zone 4", "CRITICAL", "#c6ff00"],
+    ["Medical kits · Zone 2", "HIGH", "#7fe3ff"],
+    ["Shelter beds · Zone 1", "HIGH", "#7fe3ff"],
+    ["Food packets · Zone 3", "MEDIUM", "#ffffff"],
+  ];
+  return (
+    <Frame title="saarthi / control room" right="12 NEEDS · 8 VOLUNTEERS">
+      <div className="flex h-full">
+        <div className="flex-1 border-r border-white/[0.08] px-[14px] py-[10px]">
+          <div className="flex items-center justify-between">
+            <Label>Open needs</Label>
+            <span className="font-mono text-[7px] text-[#c6ff00]">SOCKET LIVE</span>
+          </div>
+          <div className="mt-[7px] space-y-[5px]">
+            {needs.map(([n, u, c]) => (
+              <div key={n} className="flex items-center justify-between rounded-[3px] border border-white/[0.08] bg-white/[0.02] px-[7px] py-[5px] text-[8.5px] text-white/70">
+                {n}
+                <span className="font-mono text-[6px]" style={{ color: c }}>{u}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-[184px] shrink-0 px-[12px] py-[10px]">
+          <Label>AI match · confidence</Label>
+          <div className="mt-[6px] rounded-[4px] border border-[#c6ff00]/40 bg-[#c6ff00]/[0.05] p-[8px]">
+            <p className="text-[9px] text-white">Priya · Zone 4</p>
+            <p className="mt-[3px] font-mono text-[7px] text-[#c6ff00]">0.93 · WATER + LOGISTICS</p>
+            <p className="mt-[5px] text-[7.5px] leading-[1.5] text-white/55">Closest available volunteer with prior distribution experience.</p>
+          </div>
+          <div className="mt-[10px]">
+            <Label>Zone pressure</Label>
+            <div className="mt-[6px] flex gap-[3px]">
+              {[72, 54, 38, 88, 46, 61, 33, 58].map((v, i) => (
+                <span key={i} className="flex-1 rounded-[1px]" style={{ height: 30, background: v > 70 ? "#c6ff00" : v > 50 ? "#7fe3ff" : "rgba(255,255,255,0.18)", opacity: 0.85 }} />
+              ))}
+            </div>
+          </div>
+          <p className="mt-[9px] font-mono text-[6.5px] leading-[1.7] text-white/35">CONFIRM / REJECT MATCH<br />ALERTS · REPORTS · ANALYTICS</p>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
 const MOCKS: Record<string, () => ReactNode> = {
   nirixon: () => <NirixonMock />,
   resqsync: () => <ResQMock />,
   cognivia: () => <CogniviaMock />,
   taalmel: () => <TaalmelMock />,
+  evision: () => <EvisionMock />,
+  safepath: () => <SafePathMock />,
+  pricing: () => <PricingMock />,
+  cerevia: () => <CereviaMock />,
+  locus: () => <LocusMock />,
+  polarsync: () => <PolarsyncMock />,
+  "taalmel-health": () => <TaalmelHealthMock />,
+  vestiq: () => <VestiqMock />,
+  thryve: () => <ThryveMock />,
+  unisphere: () => <UnisphereMock />,
+  unbiased: () => <UnbiasedMock />,
+  echona: () => <EchonaMock />,
+  saarthi: () => <SaarthiMock />,
 };
 
 /* deterministic per-repo randomness so every generated mock is different but stable */

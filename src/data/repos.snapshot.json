@@ -3,99 +3,401 @@
     "name": "Nirixon",
     "description": "Pediatric Neurodevelopmental NLP Screening & Adaptive Assessment Platform",
     "language": "Python",
-    "topics": ["nlp", "fastapi", "scikit-learn", "healthcare"],
+    "topics": [
+      "nlp",
+      "fastapi",
+      "scikit-learn",
+      "healthcare"
+    ],
     "html_url": "https://github.com/kirtankumarsanghi/Nirixon",
     "homepage": "",
     "stargazers_count": 0,
-    "pushed_at": "2026-01-01T00:00:00Z",
-    "fork": false
+    "pushed_at": "2026-11-08T17:24:50Z",
+    "fork": false,
+    "languages": {
+      "TypeScript": 1906406,
+      "Python": 1860041,
+      "CSS": 57210,
+      "JavaScript": 7537,
+      "HTML": 6188,
+      "Java": 2695,
+      "Shell": 1378,
+      "Mako": 621
+    }
   },
   {
-    "name": "ResQSync",
-    "description": "Emergency Resource Allocation & Conflict Resolution Platform",
+    "name": "EVision",
+    "description": "Statistical modeling and forecasting framework for public EV charging demand and hotspot optimization across 51 Indian cities.",
+    "language": "HTML",
+    "topics": [
+      "ev-charging",
+      "forecasting",
+      "negative-binomial",
+      "sarima",
+      "fastapi",
+      "react"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/EVision",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-11-05T20:18:59Z",
+    "fork": false,
+    "languages": {
+      "HTML": 622005,
+      "Python": 303503,
+      "TypeScript": 256371,
+      "Jupyter Notebook": 233284,
+      "CSS": 11825,
+      "JavaScript": 1461
+    }
+  },
+  {
+    "name": "cognivia",
+    "description": "AI-powered learning platform that detects confusion in real-time and provides personalized support.",
+    "language": "TypeScript",
+    "topics": [
+      "react",
+      "nodejs",
+      "supabase",
+      "gemini-api"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/cognivia",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-11-04T19:39:54Z",
+    "fork": false,
+    "languages": {
+      "TypeScript": 882643,
+      "Python": 92311,
+      "PLpgSQL": 62817,
+      "CSS": 18651,
+      "JavaScript": 4080,
+      "HTML": 1151
+    }
+  },
+  {
+    "name": "SafePath",
+    "description": "Floor-plan evacuation modeling and algorithmic pathfinding simulation platform, bridging blueprint analysis with A* graph search.",
+    "language": "TypeScript",
+    "topics": [
+      "astar",
+      "nextjs",
+      "computer-vision",
+      "ocr",
+      "pathfinding",
+      "pglite"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/SafePath",
+    "homepage": "https://safe-path-zeta.vercel.app",
+    "stargazers_count": 0,
+    "pushed_at": "2026-10-27T21:30:45Z",
+    "fork": false,
+    "languages": {
+      "TypeScript": 402348,
+      "CSS": 60510,
+      "JavaScript": 22835,
+      "HTML": 8093
+    }
+  },
+  {
+    "name": "resQsync",
+    "description": "ResQSync — A real-time crisis coordination and conflict-resolution platform that algorithmically prioritizes and dispatches scarce emergency resources across competing disaster response teams.",
     "language": "Python",
-    "topics": ["fastapi", "react", "emergency-response", "rbac"],
-    "html_url": "https://github.com/kirtankumarsanghi/ResQSync",
+    "topics": [
+      "fastapi",
+      "react",
+      "emergency-response",
+      "rbac"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/resQsync",
     "homepage": "",
     "stargazers_count": 0,
-    "pushed_at": "2026-01-01T00:00:00Z",
-    "fork": false
+    "pushed_at": "2026-10-25T11:03:36Z",
+    "fork": true,
+    "languages": {
+      "Python": 455634,
+      "TypeScript": 347109,
+      "HTML": 342886,
+      "JavaScript": 40533,
+      "Dockerfile": 1828,
+      "Mako": 724
+    }
   },
   {
-    "name": "Cognivia",
-    "description": "Real-Time Classroom Intelligence & AI Tutoring Platform",
+    "name": "Pricing-the-Game",
+    "description": "An interactive game-theory simulation of a delivery-fee duopoly price war (QuickBite vs Yummly).",
     "language": "TypeScript",
-    "topics": ["react", "nodejs", "supabase", "gemini-api"],
-    "html_url": "https://github.com/kirtankumarsanghi/Cognivia",
-    "homepage": "",
+    "topics": [
+      "folk-theorem",
+      "game-theory",
+      "nash-equilibrium",
+      "prisoners-dilemma",
+      "react",
+      "repeated-games",
+      "typescript",
+      "vite"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/Pricing-the-Game",
+    "homepage": "https://pricing-the-game.vercel.app",
     "stargazers_count": 0,
-    "pushed_at": "2026-01-01T00:00:00Z",
-    "fork": false
+    "pushed_at": "2026-10-24T09:58:45Z",
+    "fork": false,
+    "languages": {
+      "TypeScript": 234102,
+      "CSS": 10472,
+      "HTML": 1354
+    }
   },
   {
-    "name": "Taalmel-Sync",
-    "description": "Event-Sourced Medication Reconciliation Engine",
+    "name": "polarsync-edge",
+    "description": "Offline-first AI energy manager for Antarctic stations. Dual-model forecasting + smart solar/battery/fuel switching with human-in-the-loop safety.",
     "language": "TypeScript",
-    "topics": ["event-sourcing", "prisma", "redis", "healthcare"],
-    "html_url": "https://github.com/kirtankumarsanghi/Taalmel-Sync",
+    "topics": [
+      "energy",
+      "onnx",
+      "forecasting",
+      "offline-first",
+      "pwa",
+      "timescaledb"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/polarsync-edge",
     "homepage": "",
     "stargazers_count": 0,
-    "pushed_at": "2026-01-01T00:00:00Z",
-    "fork": false
+    "pushed_at": "2026-09-08T18:17:12Z",
+    "fork": false,
+    "languages": {
+      "TypeScript": 300714,
+      "Python": 7993,
+      "CSS": 1956,
+      "Dockerfile": 883,
+      "JavaScript": 707
+    }
+  },
+  {
+    "name": "TaalMel-Sync",
+    "description": "Event-sourced medication reality and reconciliation backend — Taalmel Health.",
+    "language": "TypeScript",
+    "topics": [
+      "event-sourcing",
+      "prisma",
+      "redis",
+      "healthcare"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/TaalMel-Sync",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-09-04T21:04:31Z",
+    "fork": false,
+    "languages": {
+      "TypeScript": 228466,
+      "Dockerfile": 137
+    }
+  },
+  {
+    "name": "TaalMel-Health",
+    "description": "Deterministic medication & diagnosis reconciliation across providers and households — free-text input, point-of-care safety checks, no FHIR required.",
+    "language": "Python",
+    "topics": [
+      "fastapi",
+      "mcp",
+      "healthcare",
+      "reconciliation",
+      "icd-10"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/TaalMel-Health",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-08-30T12:14:17Z",
+    "fork": false,
+    "languages": {
+      "Python": 114652,
+      "Shell": 1202,
+      "Makefile": 223
+    }
+  },
+  {
+    "name": "Locus",
+    "description": "A next-generation library management ecosystem combining real-time occupancy monitoring, AI-powered study recommendations, intelligent room booking, advanced analytics, and automated administration.",
+    "language": "TypeScript",
+    "topics": [
+      "react",
+      "socket-io",
+      "sqlite",
+      "realtime",
+      "analytics"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/Locus",
+    "homepage": "https://locus-mocha.vercel.app",
+    "stargazers_count": 0,
+    "pushed_at": "2026-06-14T07:50:19Z",
+    "fork": false,
+    "languages": {
+      "TypeScript": 643311,
+      "JavaScript": 8266,
+      "CSS": 2637,
+      "HTML": 957,
+      "Procfile": 35
+    }
+  },
+  {
+    "name": "THRYVE",
+    "description": "THRYVE is a full-stack enterprise performance management platform designed to help organizations manage goals, approvals, quarterly performance tracking, governance workflows, and analytics through a unified system.",
+    "language": "JavaScript",
+    "topics": [
+      "react",
+      "fastapi",
+      "rbac",
+      "analytics",
+      "governance"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/THRYVE",
+    "homepage": "https://thryve-ruddy.vercel.app/",
+    "stargazers_count": 0,
+    "pushed_at": "2026-05-29T08:21:36Z",
+    "fork": false,
+    "languages": {
+      "JavaScript": 708585,
+      "Python": 233188,
+      "CSS": 3239,
+      "HTML": 682,
+      "Procfile": 105
+    }
+  },
+  {
+    "name": "UNISPHERE",
+    "description": "Unisphere is a production-grade, full-stack college discovery platform built for Indian students navigating undergraduate and postgraduate admissions.",
+    "language": "TypeScript",
+    "topics": [
+      "nextjs",
+      "prisma",
+      "postgresql",
+      "college-discovery",
+      "gemini"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/UNISPHERE",
+    "homepage": "https://unisphere-xi.vercel.app",
+    "stargazers_count": 0,
+    "pushed_at": "2026-05-26T18:54:15Z",
+    "fork": false,
+    "languages": {
+      "TypeScript": 512050,
+      "HTML": 88193,
+      "JavaScript": 31882,
+      "CSS": 1366
+    }
+  },
+  {
+    "name": "cerevia",
+    "description": "Mental wellness platform focused on daily self-reflection, emotional tracking, and practical support tools.",
+    "language": "JavaScript",
+    "topics": [
+      "react",
+      "express",
+      "mongodb",
+      "wellness"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/cerevia",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-05-29T08:37:50Z",
+    "fork": false,
+    "languages": {
+      "JavaScript": 114851,
+      "CSS": 51035,
+      "HTML": 402
+    }
+  },
+  {
+    "name": "Unbiased-ai",
+    "description": "Unbiased AI is a next-generation AI governance and unbiased decision intelligence platform designed for both enterprises and everyday users.",
+    "language": "TypeScript",
+    "topics": [
+      "ai-governance",
+      "fairness",
+      "explainability",
+      "fastapi",
+      "react"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/Unbiased-ai",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-05-29T08:46:21Z",
+    "fork": false,
+    "languages": {
+      "TypeScript": 264713,
+      "Python": 150202,
+      "CSS": 3312,
+      "HTML": 888,
+      "Dockerfile": 445,
+      "Shell": 408
+    }
+  },
+  {
+    "name": "vestiq",
+    "description": "VestIQ — a full-stack personal portfolio and goal tracking dashboard.",
+    "language": "JavaScript",
+    "topics": [
+      "nextjs",
+      "express",
+      "mongodb",
+      "recharts"
+    ],
+    "html_url": "https://github.com/kirtankumarsanghi/vestiq",
+    "homepage": "",
+    "stargazers_count": 0,
+    "pushed_at": "2026-05-29T08:52:51Z",
+    "fork": false,
+    "languages": {
+      "JavaScript": 76411,
+      "CSS": 20080
+    }
   },
   {
     "name": "Echona",
-    "description": "where emotions echo through music",
+    "description": "Where emotions echo through music — multimodal emotion detection and music therapy platform.",
     "language": "JavaScript",
-    "topics": [],
+    "topics": [
+      "react",
+      "tensorflow",
+      "flask",
+      "spotify",
+      "emotion-detection"
+    ],
     "html_url": "https://github.com/kirtankumarsanghi/Echona",
     "homepage": "",
     "stargazers_count": 0,
-    "pushed_at": "2026-01-01T00:00:00Z",
-    "fork": false
+    "pushed_at": "2026-05-29T08:31:14Z",
+    "fork": false,
+    "languages": {
+      "JavaScript": 834618,
+      "Python": 70701,
+      "CSS": 38503,
+      "HTML": 5558,
+      "PowerShell": 4289
+    }
   },
   {
     "name": "Saarthi_Smart_Resource_Allocation_Platform",
     "description": "Fork of OmWattamwar2911's Saarthi — smart resource allocation platform.",
     "language": "JavaScript",
-    "topics": [],
+    "topics": [
+      "socket-io",
+      "react-query",
+      "mongodb",
+      "crisis-response"
+    ],
     "html_url": "https://github.com/kirtankumarsanghi/Saarthi_Smart_Resource_Allocation_Platform",
     "homepage": "",
     "stargazers_count": 0,
-    "pushed_at": "2026-01-01T00:00:00Z",
-    "fork": true
-  },
-  {
-    "name": "Unbiased-ai",
-    "description": "",
-    "language": "TypeScript",
-    "topics": [],
-    "html_url": "https://github.com/kirtankumarsanghi/Unbiased-ai",
-    "homepage": "",
-    "stargazers_count": 0,
-    "pushed_at": "2026-01-01T00:00:00Z",
-    "fork": false
-  },
-  {
-    "name": "THRYVE",
-    "description": "",
-    "language": "JavaScript",
-    "topics": [],
-    "html_url": "https://github.com/kirtankumarsanghi/THRYVE",
-    "homepage": "",
-    "stargazers_count": 0,
-    "pushed_at": "2026-01-01T00:00:00Z",
-    "fork": false
-  },
-  {
-    "name": "UNISPHERE",
-    "description": "",
-    "language": "TypeScript",
-    "topics": [],
-    "html_url": "https://github.com/kirtankumarsanghi/UNISPHERE",
-    "homepage": "",
-    "stargazers_count": 0,
-    "pushed_at": "2026-01-01T00:00:00Z",
-    "fork": false
+    "pushed_at": "2026-05-24T10:30:29Z",
+    "fork": true,
+    "languages": {
+      "JavaScript": 347263,
+      "CSS": 36079,
+      "Shell": 6263,
+      "PowerShell": 2394,
+      "Dockerfile": 767,
+      "HTML": 394
+    }
   }
 ]
